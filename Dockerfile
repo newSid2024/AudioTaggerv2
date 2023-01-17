@@ -9,10 +9,14 @@ RUN apt-get install --assume-yes --no-install-recommends --quiet \
         python3-pip \
         ffmpeg
 RUN python3 -m pip install --upgrade pip
-       
+
+RUN pip install --root-user-action=ignore
+
 RUN pip install --upgrade tensorflow-hub        
 
 RUN pip install --no-cache --upgrade pip setuptools
+
+
     
 # Set working directory
 WORKDIR /TaggingAudioEffects
@@ -29,12 +33,13 @@ RUN ls -a
 # Install local dependencies
 RUN pip3 install -r requirements.txt
 
+
 # Installing JQ required for parsing
 WORKDIR /bin
 RUN apt-get install -y wget
 RUN wget "http://stedolan.github.io/jq/download/linux64/jq" && chmod 755 jq
 RUN pwd 
 # CMD ["/bin/jq"]
-
+ENV PIP_ROOT_USER_ACTION=ignore
 # Remove copied folder
 RUN rm -f -r ./tagging_audio_effects
