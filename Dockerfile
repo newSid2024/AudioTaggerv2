@@ -8,6 +8,7 @@ RUN apt-get install --assume-yes --no-install-recommends --quiet \
         python3 \
         python3-pip \
         ffmpeg
+RUN python3 -m pip install --upgrade pip
        
 RUN pip install --upgrade tensorflow-hub        
 
